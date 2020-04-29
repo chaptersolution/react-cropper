@@ -118,9 +118,11 @@ class ReactCropper extends Component {
   componentWillUnmount() {
     if (this.img) {
       // Destroy the cropper, this makes sure events such as resize are cleaned up and do not leak
-      this.cropper.destroy();
-      delete this.img;
-      delete this.cropper;
+      try {
+        this.cropper.destroy();
+        delete this.img;
+        delete this.cropper;
+      } catch (e) {}
     }
   }
 
